@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>آزمایشگاه تعاملی فصل ۹ ریاضی هشتم | دایره</title>
+<style>
+:root{
+  --bg:#07111f;
+  --panel:#0d1b2d;
+  --panel2:#11253d;
+  --ink:#f4f8ff;
+  --muted:#a8bad3;
+  --blue:#4ea1ff;
+  --cyan:#45e4da;
+  --green:#56e39f;
+  --orange:#ffb64d;
+  --red:#ff6b7a;
+  --violet:#9c7cff;
+  --line:rgba(255,255,255,.09);
+  --shadow:0 18px 50px rgba(0,0,0,.32);
+  --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:Vazirmatn,IRANSansX,IRANSans,Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(78,161,255,.16),transparent 28%),
+    radial-gradient(circle at 85% 12%,rgba(156,124,255,.14),transparent 24%),
+    linear-gradient(180deg,#06101c 0%,#081523 50%,#06101c 100%);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+button,input{font:inherit}
+button{touch-action:manipulation}
+.app{width:min(1500px,100%);margin:auto;padding:18px}
+.hero{
+  position:relative;overflow:hidden;
+  padding:24px 24px 20px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  background:linear-gradient(145deg,rgba(18,40,66,.95),rgba(8,22,38,.92));
+  box-shadow:var(--shadow),inset 0 1px rgba(255,255,255,.06);
+}
+.hero:after{
+  content:"";position:absolute;left:-70px;top:-90px;width:290px;height:290px;border-radius:50%;
+  background:radial-gradient(circle,rgba(69,228,218,.13),transparent 68%);pointer-events:none
+}
+.hero-row{display:flex;gap:18px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{
+  width:66px;height:66px;border-radius:20px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#12355b,#0a1b2f);border:1px solid rgba(255,255,255,.12);
+  box-shadow:10px 10px 22px rgba(0,0,0,.28),-5px -5px 18px rgba(78,161,255,.09),inset 0 1px rgba(255,255,255,.12)
+}
+.logo svg{width:46px;height:46px}
+h1{font-size:clamp(1.35rem,2.8vw,2.25rem);margin:0 0 7px;line-height:1.35}
+.subtitle{color:var(--muted);margin:0;font-size:.96rem;line-height:1.8}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045);color:#dce9fb;font-size:.84rem}
+.tabs{display:flex;gap:10px;overflow:auto;padding:14px 2px 3px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn,.btn{
+  border:1px solid rgba(255,255,255,.10);color:var(--ink);cursor:pointer;white-space:nowrap;
+  background:linear-gradient(180deg,#173453,#0c2037);
+  border-radius:16px;padding:11px 15px;
+  box-shadow:0 7px 0 #06111f,0 11px 24px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.12);
+  transition:.18s ease;user-select:none
+}
+.tab-btn:hover,.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.tab-btn:active,.btn:active{transform:translateY(4px);box-shadow:0 3px 0 #06111f,0 6px 14px rgba(0,0,0,.2)}
+.tab-btn.active{background:linear-gradient(180deg,#387fd2,#175198);box-shadow:0 7px 0 #0a3462,0 11px 24px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.18)}
+.btn.green{background:linear-gradient(180deg,#2f9f72,#146444);box-shadow:0 7px 0 #0b3e2b,0 11px 24px rgba(0,0,0,.22)}
+.btn.orange{background:linear-gradient(180deg,#d88d27,#8f5411);box-shadow:0 7px 0 #5d350a,0 11px 24px rgba(0,0,0,.22)}
+.btn.red{background:linear-gradient(180deg,#cc4b5a,#7c2430);box-shadow:0 7px 0 #4b151c,0 11px 24px rgba(0,0,0,.22)}
+.btn.small{padding:9px 12px;border-radius:13px;font-size:.9rem}
+.section{display:none;margin-top:18px}
+.section.active{display:block;animation:fade .26s ease}
+@keyframes fade{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
+.lab-grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(285px,.75fr);gap:16px;align-items:start}
+.card{
+  border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(150deg,rgba(16,35,58,.95),rgba(8,23,39,.96));
+  box-shadow:var(--shadow),inset 0 1px rgba(255,255,255,.055);overflow:hidden
+}
+.card-head{padding:16px 18px 12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.card-head h2,.card-head h3{margin:0;font-size:1.03rem}.hint{font-size:.82rem;color:var(--muted)}
+.canvas-wrap{position:relative;padding:12px}
+canvas{display:block;width:100%;height:auto;min-height:420px;border-radius:19px;background:
+  linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),#081829;background-size:30px 30px;touch-action:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.overlay-tip{position:absolute;right:25px;bottom:24px;padding:8px 11px;border-radius:12px;background:rgba(3,10,19,.78);border:1px solid var(--line);color:#dce7f7;font-size:.79rem;backdrop-filter:blur(7px);pointer-events:none}
+.panel{padding:16px}
+.metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.metric{padding:13px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.035)}
+.metric .k{font-size:.78rem;color:var(--muted);margin-bottom:6px}.metric .v{font-size:1.15rem;font-weight:800;direction:ltr;text-align:right}
+.state-box{padding:15px;border-radius:18px;margin:10px 0 14px;border:1px solid var(--line);background:rgba(255,255,255,.035)}
+.state-title{font-weight:900;font-size:1.02rem;margin-bottom:6px}.state-desc{font-size:.9rem;color:#d3e2f5;line-height:1.8}
+.controls{display:grid;gap:13px}
+.control{padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}
+.control-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;font-size:.9rem}.control strong{direction:ltr}
+input[type=range]{width:100%;accent-color:#4ea1ff;cursor:pointer}
+.button-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
+.note{font-size:.84rem;line-height:1.8;color:var(--muted);margin-top:13px;padding:12px;border-radius:14px;background:rgba(78,161,255,.07);border:1px solid rgba(78,161,255,.15)}
+.formula{direction:ltr;text-align:center;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;padding:12px;border-radius:14px;background:#071421;border:1px solid var(--line);color:#dff8ff;font-size:.96rem;margin-top:10px}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.78rem;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:5px}.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.challenge-wrap{padding:18px;display:grid;grid-template-columns:1fr 320px;gap:16px}
+.question{font-size:1.08rem;line-height:2;margin:0 0 15px}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.answer{padding:13px 14px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,#15304e,#0c2138);color:var(--ink);cursor:pointer;box-shadow:0 5px 0 #06111f;transition:.16s}
+.answer:hover{transform:translateY(-2px)}.answer.correct{outline:2px solid var(--green);background:#123e31}.answer.wrong{outline:2px solid var(--red);background:#431b25}
+.scorebox{padding:16px}.score-ring{width:130px;height:130px;border-radius:50%;margin:10px auto 18px;display:grid;place-items:center;background:conic-gradient(var(--green) var(--p,0%),rgba(255,255,255,.08) 0);position:relative}.score-ring:after{content:"";position:absolute;inset:13px;border-radius:50%;background:#0b1d31}.score-ring b{z-index:1;font-size:1.4rem}.feedback{min-height:48px;line-height:1.8;color:#dbe8f7;font-size:.92rem;padding-top:11px}.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.mini{padding:11px;border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:14px;text-align:center}.mini b{display:block;font-size:1.08rem}.mini span{font-size:.72rem;color:var(--muted)}
+.footer{padding:18px 8px 6px;color:#7f96b2;font-size:.78rem;text-align:center}
+.kbd{display:inline-block;padding:2px 6px;border:1px solid rgba(255,255,255,.16);border-radius:7px;background:rgba(255,255,255,.05);color:#cfe2fa}
+@media (max-width:980px){.lab-grid,.challenge-wrap{grid-template-columns:1fr}.challenge-wrap{padding:12px}.scorebox{order:-1}.score-ring{width:110px;height:110px}.hero{padding:18px}.app{padding:10px}}
+@media (max-width:640px){.brand{align-items:flex-start}.logo{width:54px;height:54px;border-radius:16px}.logo svg{width:38px;height:38px}.hero-badges{display:none}.tab-btn{padding:10px 12px;font-size:.86rem}.card-head{padding:13px}.canvas-wrap{padding:8px}canvas{min-height:360px}.panel{padding:12px}.metric-grid{grid-template-columns:1fr 1fr}.answers{grid-template-columns:1fr}.button-row .btn{flex:1}.overlay-tip{display:none}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <div class="hero-row">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="34" fill="none" stroke="#45e4da" stroke-width="6"/>
+            <line x1="9" y1="70" x2="91" y2="35" stroke="#ffb64d" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="5" fill="#fff"/>
+          </svg>
+        </div>
+        <div>
+          <h1>آزمایشگاه تعاملی دایره — فصل ۹ ریاضی هشتم</h1>
+          <p class="subtitle">کشف کن، جابه‌جا کن، اندازه بگیر و رابطه‌ها را خودت ببین؛ مناسب تدریس کلاسی، تخته هوشمند و موبایل.</p>
+        </div>
+      </div>
+      <div class="hero-badges">
+        <span class="badge">کاملاً آفلاین</span><span class="badge">لمسی و Drag & Drop</span><span class="badge">Mobile Friendly</span><span class="badge">بدون کتابخانه خارجی</span>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="بخش‌های آزمایشگاه">
+      <button class="tab-btn active" data-tab="lineLab">خط و دایره</button>
+      <button class="tab-btn" data-tab="angleLab">زاویه‌های مرکزی و محاطی</button>
+      <button class="tab-btn" data-tab="chordLab">وتر، قطر و مماس</button>
+      <button class="tab-btn" data-tab="arcLab">کمان و طول کمان</button>
+      <button class="tab-btn" data-tab="centerLab">کشف مرکز دایره</button>
+      <button class="tab-btn" data-tab="challengeLab">چالش جامع</button>
+    </nav>
+  </header>
+
+  <section id="lineLab" class="section active">
+    <div class="lab-grid">
+      <article class="card">
+        <div class="card-head">
+          <h2>موقعیت خط نسبت به دایره</h2>
+          <div class="legend"><span><i class="dot" style="background:#ffb64d"></i> خط متحرک</span><span><i class="dot" style="background:#45e4da"></i> فاصله عمودی مرکز تا خط</span><span><i class="dot" style="background:#56e39f"></i> نقاط برخورد</span></div>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="lineCanvas" width="1000" height="620" aria-label="آزمایش تعاملی وضعیت خط و دایره"></canvas>
+          <div class="overlay-tip">خود خط را بکش تا جابه‌جا شود؛ دستگیره نارنجی را بکش تا بچرخد.</div>
+        </div>
+      </article>
+      <aside class="card panel">
+        <div class="metric-grid">
+          <div class="metric"><div class="k">شعاع دایره (r)</div><div class="v" id="lineR">160</div></div>
+          <div class="metric"><div class="k">فاصله مرکز تا خط (d)</div><div class="v" id="lineD">0</div></div>
+          <div class="metric"><div class="k">نسبت d / r</div><div class="v" id="lineRatio">0.00</div></div>
+          <div class="metric"><div class="k">تعداد نقاط مشترک</div><div class="v" id="lineHits">2</div></div>
+        </div>
+        <div class="state-box" id="lineStateBox">
+          <div class="state-title" id="lineStateTitle">قاطع</div>
+          <div class="state-desc" id="lineStateDesc">چون فاصله مرکز تا خط از شعاع کمتر است، خط دایره را در دو نقطه قطع می‌کند.</div>
+        </div>
+        <div class="controls">
+          <div class="control">
+            <div class="control-row"><span>شعاع دایره</span><strong id="radiusOut">160</strong></div>
+            <input id="radiusSlider" type="range" min="90" max="220" value="160" />
+          </div>
+          <div class="control">
+            <div class="control-row"><span>زاویه خط</span><strong id="angleOut">-12°</strong></div>
+            <input id="lineAngleSlider" type="range" min="-80" max="80" value="-12" />
+          </div>
+          <div class="button-row">
+            <button class="btn small green" id="setSecant">قاطع</button>
+            <button class="btn small orange" id="setTangent">مماس</button>
+            <button class="btn small red" id="setOutside">خارج دایره</button>
+          </div>
+        </div>
+        <div class="formula" id="lineFormula">d &lt; r  →  2 intersections</div>
+        <div class="note">رابطه کلیدی: اگر <b>فاصله مرکز تا خط کمتر از شعاع</b> باشد خط قاطع است؛ اگر برابر شعاع باشد مماس و اگر بیشتر باشد هیچ نقطه مشترکی ندارند.</div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="angleLab" class="section">
+    <div class="lab-grid">
+      <article class="card">
+        <div class="card-head">
+          <h2>زاویه مرکزی، زاویه محاطی و زاویه‌های هم‌کمان</h2>
+          <span class="hint">نقاط A، B، C و D همگی قابل Drag هستند.</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="angleCanvas" width="1000" height="620" aria-label="آزمایش زاویه مرکزی و محاطی"></canvas>
+          <div class="overlay-tip">A و B را برای تغییر کمان بکش؛ C و D را روی کمان مقابل جابه‌جا کن.</div>
+        </div>
+      </article>
+      <aside class="card panel">
+        <div class="metric-grid">
+          <div class="metric"><div class="k">زاویه مرکزی ∠AOB</div><div class="v" id="centralVal">100°</div></div>
+          <div class="metric"><div class="k">زاویه محاطی ∠ACB</div><div class="v" id="inscribedVal">50°</div></div>
+          <div class="metric"><div class="k">زاویه محاطی دوم ∠ADB</div><div class="v" id="inscribed2Val">50°</div></div>
+          <div class="metric"><div class="k">کمان AB روبه‌روی C و D</div><div class="v" id="arcVal">100°</div></div>
+        </div>
+        <div class="controls">
+          <div class="control">
+            <div class="control-row"><span>اندازه کمان کوچک AB</span><strong id="arcOut">100°</strong></div>
+            <input id="arcSlider" type="range" min="20" max="180" value="100" />
+          </div>
+          <div class="button-row">
+            <button class="btn small" id="preset60">کمان ۶۰°</button>
+            <button class="btn small" id="preset120">کمان ۱۲۰°</button>
+            <button class="btn small green" id="preset180">قطر / نیم‌دایره</button>
+          </div>
+        </div>
+        <div class="formula" id="angleFormula">∠ACB = ∠ADB = ½ × ∠AOB</div>
+        <div class="state-box">
+          <div class="state-title">کشف سه رابطه در یک شکل</div>
+          <div class="state-desc" id="angleRuleText">زاویه مرکزی با کمان روبه‌رو برابر است؛ زاویه محاطی نصف همان کمان است؛ و زاویه‌های محاطی روبه‌روی یک کمان با هم برابرند.</div>
+        </div>
+        <div class="note">آزمایش ویژه: دکمه «قطر / نیم‌دایره» را بزن و C یا D را حرکت بده. هر زاویه محاطی روبه‌روی قطر، همیشه ۹۰ درجه می‌ماند.</div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="chordLab" class="section">
+    <div class="lab-grid">
+      <article class="card">
+        <div class="card-head">
+          <h2>وتر، قطر و مماس</h2>
+          <span class="hint">وتر را به مرکز نزدیک کن؛ نقطه وسط و عمود مرکز بر وتر را ببین. نقطه T نیز متحرک است.</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="chordCanvas" width="1000" height="620" aria-label="آزمایش تعاملی وتر و مماس"></canvas>
+          <div class="overlay-tip">وتر بنفش یا نقطه T را Drag کن.</div>
+        </div>
+      </article>
+      <aside class="card panel">
+        <div class="metric-grid">
+          <div class="metric"><div class="k">فاصله مرکز تا وتر</div><div class="v" id="chordD">75</div></div>
+          <div class="metric"><div class="k">طول وتر</div><div class="v" id="chordLen">282</div></div>
+          <div class="metric"><div class="k">شعاع</div><div class="v" id="chordR">160</div></div>
+          <div class="metric"><div class="k">AM و MB</div><div class="v" id="halfChordVal">141 = 141</div></div>
+        </div>
+        <div class="controls">
+          <div class="control">
+            <div class="control-row"><span>فاصله وتر از مرکز</span><strong id="chordDOut">75</strong></div>
+            <input id="chordSlider" type="range" min="0" max="155" value="75" />
+          </div>
+          <div class="button-row">
+            <button class="btn small green" id="makeDiameter">تبدیل به قطر</button>
+            <button class="btn small" id="midChord">وتر میانی</button>
+          </div>
+        </div>
+        <div class="formula" id="chordFormula">L = 2√(r² − d²)</div>
+        <div class="note">هرچه وتر به مرکز نزدیک‌تر شود، بلندتر می‌شود؛ بلندترین وتر همان <b>قطر</b> است. عمود رسم‌شده از مرکز بر وتر، آن را نصف می‌کند و شعاعِ نقطه تماس بر مماس عمود است.</div>
+      </aside>
+    </div>
+  </section>
+
+
+  <section id="arcLab" class="section">
+    <div class="lab-grid">
+      <article class="card">
+        <div class="card-head">
+          <h2>کمان، زاویه مرکزی و طول کمان</h2>
+          <span class="hint">اندازه زاویه یا شعاع را تغییر بده و سهم کمان از محیط را ببین.</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="arcCanvas" width="1000" height="620" aria-label="آزمایش کمان و طول کمان"></canvas>
+          <div class="overlay-tip">دستگیره B را روی محیط Drag کن یا از اسلایدرها استفاده کن.</div>
+        </div>
+      </article>
+      <aside class="card panel">
+        <div class="metric-grid">
+          <div class="metric"><div class="k">زاویه مرکزی θ</div><div class="v" id="arcThetaVal">90°</div></div>
+          <div class="metric"><div class="k">سهم کمان از دایره</div><div class="v" id="arcFractionVal">1/4</div></div>
+          <div class="metric"><div class="k">محیط دایره</div><div class="v" id="circVal">1005</div></div>
+          <div class="metric"><div class="k">طول کمان</div><div class="v" id="arcLengthVal">251</div></div>
+        </div>
+        <div class="controls">
+          <div class="control"><div class="control-row"><span>زاویه مرکزی</span><strong id="arcThetaOut">90°</strong></div><input id="arcThetaSlider" type="range" min="10" max="350" value="90" /></div>
+          <div class="control"><div class="control-row"><span>شعاع</span><strong id="arcRadiusOut">160</strong></div><input id="arcRadiusSlider" type="range" min="80" max="210" value="160" /></div>
+          <div class="control"><div class="control-row"><span>تقسیم دایره به قسمت‌های مساوی</span><strong id="divisionOut">4 قسمت</strong></div><input id="divisionSlider" type="range" min="3" max="12" value="4" /></div>
+          <div class="button-row"><button class="btn small" id="arcQuarter">¼ دایره</button><button class="btn small" id="arcThird">⅓ دایره</button><button class="btn small green" id="arcHalf">½ دایره</button></div>
+        </div>
+        <div class="formula" id="arcFormula">L = (θ / 360) × 2πr</div>
+        <div class="note">در این آزمایش، تقسیم‌های مساوی به‌صورت شعاع‌های کم‌رنگ نمایش داده می‌شوند. بنابراین دانش‌آموز هم ارتباط زاویه مرکزی و کمان را می‌بیند و هم مفهوم «کسری از محیط دایره» را تجربه می‌کند.</div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="centerLab" class="section">
+    <div class="lab-grid">
+      <article class="card">
+        <div class="card-head">
+          <h2>کشف مرکز دایره با دو وتر</h2>
+          <span class="hint">چهار سرِ دو وتر را Drag کن؛ عمودمنصف‌ها همیشه در مرکز به هم می‌رسند.</span>
+        </div>
+        <div class="canvas-wrap">
+          <canvas id="centerCanvas" width="1000" height="620" aria-label="آزمایش کشف مرکز دایره با عمودمنصف وترها"></canvas>
+          <div class="overlay-tip">A، B، C و D را روی محیط جابه‌جا کن.</div>
+        </div>
+      </article>
+      <aside class="card panel">
+        <div class="metric-grid">
+          <div class="metric"><div class="k">فاصله نقطه تقاطع تا مرکز</div><div class="v" id="centerErrorVal">0.0</div></div>
+          <div class="metric"><div class="k">وضعیت کشف مرکز</div><div class="v" id="centerStatusVal">دقیق</div></div>
+          <div class="metric"><div class="k">وتر اول</div><div class="v" id="centerChord1Val">—</div></div>
+          <div class="metric"><div class="k">وتر دوم</div><div class="v" id="centerChord2Val">—</div></div>
+        </div>
+        <div class="button-row"><button class="btn small green" id="randomChords">چیدمان تازه</button><button class="btn small" id="showCenterToggle">پنهان/نمایان کردن O</button></div>
+        <div class="formula">مرکز دایره = محل برخورد عمودمنصف دو وتر ناموازی</div>
+        <div class="state-box"><div class="state-title">روش ساخت مرکز یک دایره ناشناخته</div><div class="state-desc">دو وتر دلخواه رسم کن، وسط هر وتر را پیدا کن و از آن نقطه عمودی بر وتر رسم کن. محل تقاطع دو عمودمنصف، مرکز دایره است.</div></div>
+        <div class="note" id="centerNote">اگر دو وتر تقریباً موازی شوند، محل تقاطع عمودمنصف‌ها از نظر عددی حساس‌تر می‌شود؛ وترها را در جهت‌های متفاوت انتخاب کن.</div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="challengeLab" class="section">
+    <article class="card">
+      <div class="card-head"><h2>چالش جامع ۸ مرحله‌ای</h2><span class="hint">برای جمع‌بندی فصل یا ارزشیابی پایانی</span></div>
+      <div class="challenge-wrap">
+        <div>
+          <p class="question" id="questionText"></p>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback"></div>
+          <div class="button-row"><button class="btn green" id="nextQuestion">سؤال بعدی</button><button class="btn" id="restartQuiz">شروع دوباره</button></div>
+        </div>
+        <aside class="scorebox">
+          <div class="score-ring" id="scoreRing"><b id="scorePct">0%</b></div>
+          <div class="mini-grid">
+            <div class="mini"><b id="scoreGood">0</b><span>درست</span></div>
+            <div class="mini"><b id="scoreBad">0</b><span>نادرست</span></div>
+            <div class="mini"><b id="scoreStep">1/8</b><span>مرحله</span></div>
+          </div>
+          <div class="note">پیشنهاد تدریس: ابتدا دانش‌آموز پیش‌بینی کند، سپس با آزمایش شکل را جابه‌جا کند و در پایان قاعده را با زبان خودش بیان کند.</div>
+        </aside>
+      </div>
+    </article>
+  </section>
+
+  <div class="footer">آزمایشگاه تک‌فایلی HTML/CSS/JavaScript — مناسب نمایشگر کلاس، لپ‌تاپ، تبلت و موبایل</div>
+</div>
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const rad=d=>d*Math.PI/180, deg=r=>r*180/Math.PI, TAU=Math.PI*2;
+  const hypot=Math.hypot, fmt=v=>Math.round(v);
+  const normalize=a=>{a%=TAU;if(a<0)a+=TAU;return a};
+  const signedDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
+  const minorDelta=(a,b)=>Math.abs(signedDiff(b,a));
+  const midMinor=(a,b)=>normalize(a + signedDiff(b,a)/2);
+
+  // ---------- Tabs ----------
+  $$('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{
+    $$('.tab-btn').forEach(b=>b.classList.remove('active'));
+    $$('.section').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active'); $('#'+btn.dataset.tab).classList.add('active');
+    requestAnimationFrame(()=>{resizeAll();drawAll()});
+  }));
+
+  // ---------- Canvas helpers ----------
+  const ctxFit=canvas=>{
+    const rect=canvas.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
+    const cssW=Math.max(320,rect.width), cssH=cssW<650?410:Math.min(620,cssW*.62);
+    canvas.style.height=cssH+'px';
+    const W=Math.round(cssW*dpr),H=Math.round(cssH*dpr);
+    if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}
+    const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return{ctx,w:cssW,h:cssH};
+  };
+  const circle=(ctx,x,y,r,fill,stroke,lw=2)=>{ctx.beginPath();ctx.arc(x,y,r,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw;ctx.stroke()}};
+  const line=(ctx,x1,y1,x2,y2,stroke,lw=2,dash=[])=>{ctx.save();ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=stroke;ctx.lineWidth=lw;ctx.setLineDash(dash);ctx.stroke();ctx.restore()};
+  const text=(ctx,t,x,y,size=16,color='#fff',align='center',weight=700)=>{ctx.save();ctx.font=`${weight} ${size}px Tahoma,Arial`;ctx.fillStyle=color;ctx.textAlign=align;ctx.textBaseline='middle';ctx.direction='rtl';ctx.fillText(t,x,y);ctx.restore()};
+  const pointerPos=(e,c)=>{const r=c.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
+  const pointOn=(O,R,a)=>({x:O.x+R*Math.cos(a),y:O.y+R*Math.sin(a)});
+  const rightMarker=(ctx,P,n,u,color='#56e39f',s=15)=>{const q1={x:P.x-n.x*s,y:P.y-n.y*s},q2={x:q1.x+u.x*s,y:q1.y+u.y*s},q3={x:P.x+u.x*s,y:P.y+u.y*s};ctx.beginPath();ctx.moveTo(q1.x,q1.y);ctx.lineTo(q2.x,q2.y);ctx.lineTo(q3.x,q3.y);ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.stroke()};
+  // Equal-segment marks used to show that a midpoint divides a chord into two equal parts.
+  const equalTick=(ctx,P,Q,count=1,color='#ffffff',size=9,gap=5,lw=2.6)=>{
+    const mx=(P.x+Q.x)/2,my=(P.y+Q.y)/2,dx=Q.x-P.x,dy=Q.y-P.y,L=Math.hypot(dx,dy)||1;
+    const ux=dx/L,uy=dy/L,nx=-uy,ny=ux;
+    const offsets=count===1?[0]:Array.from({length:count},(_,i)=>(i-(count-1)/2)*gap);
+    ctx.save();ctx.strokeStyle=color;ctx.lineWidth=lw;ctx.lineCap='round';
+    offsets.forEach(o=>{const cx=mx+ux*o,cy=my+uy*o;ctx.beginPath();ctx.moveTo(cx-nx*size,cy-ny*size);ctx.lineTo(cx+nx*size,cy+ny*size);ctx.stroke()});
+    ctx.restore();
+  };
+  function drawSmallAngle(ctx,V,P1,P2,r,color){const a1=Math.atan2(P1.y-V.y,P1.x-V.x),a2=Math.atan2(P2.y-V.y,P2.x-V.x);let d=signedDiff(a2,a1);ctx.beginPath();ctx.arc(V.x,V.y,r,a1,a1+d,d<0);ctx.strokeStyle=color;ctx.lineWidth=4;ctx.stroke()}
+  function inscribedDeg(P,A,B){const v1={x:A.x-P.x,y:A.y-P.y},v2={x:B.x-P.x,y:B.y-P.y};const dot=v1.x*v2.x+v1.y*v2.y,den=Math.hypot(v1.x,v1.y)*Math.hypot(v2.x,v2.y);return deg(Math.acos(clamp(dot/den,-1,1)))}
+
+  // ---------- Lab 1: line and circle ----------
+  const lineCanvas=$('#lineCanvas'); let L={r:160,angle:rad(-12),d:70,drag:null};
+  function lineGeom(w,h){const C={x:w*.48,y:h*.51},n={x:Math.cos(L.angle+Math.PI/2),y:Math.sin(L.angle+Math.PI/2)},u={x:Math.cos(L.angle),y:Math.sin(L.angle)},P={x:C.x+n.x*L.d,y:C.y+n.y*L.d},len=Math.max(w,h)*1.2,A={x:P.x-u.x*len,y:P.y-u.y*len},B={x:P.x+u.x*len,y:P.y+u.y*len},handle={x:P.x+u.x*Math.min(230,w*.24),y:P.y+u.y*Math.min(230,w*.24)};return{C,n,u,P,A,B,handle}}
+  function drawLineLab(){const{ctx,w,h}=ctxFit(lineCanvas);ctx.clearRect(0,0,w,h);const g=lineGeom(w,h),rr=Math.min(L.r,Math.min(w,h)*.34);L.r=rr;const d=Math.abs(L.d),eps=1.8;
+    circle(ctx,g.C.x,g.C.y,rr,'rgba(78,161,255,.055)','rgba(78,161,255,.92)',4);line(ctx,g.A.x,g.A.y,g.B.x,g.B.y,'#ffb64d',6);line(ctx,g.C.x,g.C.y,g.P.x,g.P.y,'#45e4da',4,[8,7]);
+    // Requested behavior: the 90-degree marker exists ONLY in the tangent state.
+    if(Math.abs(d-rr)<=eps){const sign=L.d>=0?1:-1;rightMarker(ctx,g.P,{x:g.n.x*sign,y:g.n.y*sign},g.u,'#56e39f',17);text(ctx,'90°',g.P.x+g.u.x*38-g.n.x*sign*24,g.P.y+g.u.y*38-g.n.y*sign*24,14,'#b8ffd8')}
+    let hits=0;if(d<rr-eps){hits=2;const t=Math.sqrt(rr*rr-d*d);[{x:g.P.x+g.u.x*t,y:g.P.y+g.u.y*t},{x:g.P.x-g.u.x*t,y:g.P.y-g.u.y*t}].forEach((p,i)=>{circle(ctx,p.x,p.y,8,'#56e39f','#eafff2',2);text(ctx,i?'B':'A',p.x,p.y-20,14)})}else if(Math.abs(d-rr)<=eps){hits=1;circle(ctx,g.P.x,g.P.y,9,'#56e39f','#fff',2);text(ctx,'T',g.P.x,g.P.y-21,14)}
+    circle(ctx,g.C.x,g.C.y,7,'#fff','#45e4da',2);text(ctx,'O',g.C.x+18,g.C.y-14,14);line(ctx,g.C.x,g.C.y,g.C.x+rr,g.C.y,'rgba(78,161,255,.75)',3);text(ctx,'r',g.C.x+rr/2,g.C.y-15,16,'#9dccff');text(ctx,'d',(g.C.x+g.P.x)/2+14,(g.C.y+g.P.y)/2,16,'#89fff7');circle(ctx,g.handle.x,g.handle.y,13,'#ffb64d','#fff3d5',3);circle(ctx,g.handle.x,g.handle.y,4,'#5b3306');text(ctx,'چرخش',g.handle.x,g.handle.y-27,12,'#ffdba7');updateLineUI(d,rr,hits)}
+  function updateLineUI(d,r,hits){const eps=1.8;let title,desc,formula,color;if(d<r-eps){title='قاطع — دو نقطه مشترک';desc='چون d < r است، خط دایره را در دو نقطه قطع می‌کند.';formula='d < r  →  2 intersections';color='#56e39f'}else if(Math.abs(d-r)<=eps){title='مماس — یک نقطه مشترک';desc='چون d = r است، خط مماس است و فقط در همین حالت علامت ۹۰° در نقطه تماس نمایش داده می‌شود.';formula='d = r  →  tangent';color='#ffb64d'}else{title='خارج دایره — بدون نقطه مشترک';desc='چون d > r است، خط هیچ نقطه مشترکی با دایره ندارد.';formula='d > r  →  0 intersections';color='#ff6b7a'}$('#lineR').textContent=fmt(r);$('#lineD').textContent=fmt(d);$('#lineRatio').textContent=(d/r).toFixed(2);$('#lineHits').textContent=hits;$('#lineStateTitle').textContent=title;$('#lineStateTitle').style.color=color;$('#lineStateDesc').textContent=desc;$('#lineFormula').textContent=formula;$('#radiusOut').textContent=fmt(r);$('#angleOut').textContent=fmt(deg(L.angle))+'°'}
+  lineCanvas.addEventListener('pointerdown',e=>{const p=pointerPos(e,lineCanvas),{w,h}=ctxFit(lineCanvas),g=lineGeom(w,h);if(hypot(p.x-g.handle.x,p.y-g.handle.y)<35)L.drag='rotate';else{const rel={x:p.x-g.P.x,y:p.y-g.P.y},dist=Math.abs(rel.x*g.n.x+rel.y*g.n.y);if(dist<35)L.drag='move'}if(L.drag){lineCanvas.setPointerCapture(e.pointerId);e.preventDefault()}});
+  lineCanvas.addEventListener('pointermove',e=>{if(!L.drag)return;const p=pointerPos(e,lineCanvas),{w,h}=ctxFit(lineCanvas),g=lineGeom(w,h);if(L.drag==='move'){const vx=p.x-g.C.x,vy=p.y-g.C.y;L.d=clamp(vx*g.n.x+vy*g.n.y,-Math.min(h*.44,260),Math.min(h*.44,260))}else{const a=Math.atan2(p.y-g.P.y,p.x-g.P.x);L.angle=a;$('#lineAngleSlider').value=clamp(fmt(deg(a)),-80,80)}drawLineLab()});['pointerup','pointercancel'].forEach(ev=>lineCanvas.addEventListener(ev,()=>L.drag=null));
+  $('#radiusSlider').addEventListener('input',e=>{L.r=+e.target.value;drawLineLab()});$('#lineAngleSlider').addEventListener('input',e=>{L.angle=rad(+e.target.value);drawLineLab()});$('#setSecant').onclick=()=>{L.d=L.r*.42;drawLineLab()};$('#setTangent').onclick=()=>{L.d=L.r;drawLineLab()};$('#setOutside').onclick=()=>{L.d=L.r*1.28;drawLineLab()};
+
+  // ---------- Lab 2: central + inscribed angles, all points draggable ----------
+  const angleCanvas=$('#angleCanvas');let AGL={a:rad(-50),b:rad(50),c:rad(180),d:rad(235),drag:null};
+  function angleGeom(w,h){const R=Math.min(175,Math.min(w,h)*.33),O={x:w*.5,y:h*.52};return{R,O,A:pointOn(O,R,AGL.a),B:pointOn(O,R,AGL.b),C:pointOn(O,R,AGL.c),D:pointOn(O,R,AGL.d)}}
+  function arcContains(a,b,x){const delta=signedDiff(b,a);const dx=signedDiff(x,a);return delta>=0?(dx>=0&&dx<=delta):(dx<=0&&dx>=delta)}
+  function keepOnMajor(key){const mid=midMinor(AGL.a,AGL.b),half=minorDelta(AGL.a,AGL.b)/2;let a=AGL[key];if(Math.abs(signedDiff(a,mid))<half+rad(8))AGL[key]=normalize(mid+Math.PI)}
+  function drawAngleLab(){const{ctx,w,h}=ctxFit(angleCanvas);ctx.clearRect(0,0,w,h);const g=angleGeom(w,h),delta=minorDelta(AGL.a,AGL.b),central=deg(delta);circle(ctx,g.O.x,g.O.y,g.R,'rgba(78,161,255,.04)','rgba(78,161,255,.88)',4);
+    const start=AGL.a,d=signedDiff(AGL.b,AGL.a);ctx.save();ctx.beginPath();ctx.arc(g.O.x,g.O.y,g.R,start,start+d,d<0);ctx.strokeStyle='#56e39f';ctx.lineWidth=9;ctx.lineCap='round';ctx.stroke();ctx.restore();
+    line(ctx,g.O.x,g.O.y,g.A.x,g.A.y,'#4ea1ff',3);line(ctx,g.O.x,g.O.y,g.B.x,g.B.y,'#4ea1ff',3);line(ctx,g.C.x,g.C.y,g.A.x,g.A.y,'#ffb64d',4);line(ctx,g.C.x,g.C.y,g.B.x,g.B.y,'#ffb64d',4);line(ctx,g.D.x,g.D.y,g.A.x,g.A.y,'rgba(156,124,255,.9)',3);line(ctx,g.D.x,g.D.y,g.B.x,g.B.y,'rgba(156,124,255,.9)',3);
+    drawSmallAngle(ctx,g.O,g.A,g.B,46,'#56e39f');drawSmallAngle(ctx,g.C,g.A,g.B,34,'#ffb64d');drawSmallAngle(ctx,g.D,g.A,g.B,28,'#9c7cff');
+    circle(ctx,g.O.x,g.O.y,7,'#fff','#4ea1ff',2);text(ctx,'O',g.O.x+18,g.O.y+12,14);[[g.A,'A','#56e39f'],[g.B,'B','#56e39f'],[g.C,'C','#ffb64d'],[g.D,'D','#9c7cff']].forEach(([p,n,c])=>{circle(ctx,p.x,p.y,12,c,'#fff',2);text(ctx,n,p.x,p.y-23,15)});
+    const i1=inscribedDeg(g.C,g.A,g.B),i2=inscribedDeg(g.D,g.A,g.B);text(ctx,`${fmt(central)}°`,g.O.x+62,g.O.y-5,16,'#b6f6d3');text(ctx,`${fmt(i1)}°`,g.C.x,g.C.y+43,16,'#ffe0b3');text(ctx,`${fmt(i2)}°`,g.D.x,g.D.y+41,15,'#d9ccff');$('#centralVal').textContent=fmt(central)+'°';$('#inscribedVal').textContent=fmt(i1)+'°';$('#inscribed2Val').textContent=fmt(i2)+'°';$('#arcVal').textContent=fmt(central)+'°';$('#arcOut').textContent=fmt(central)+'°';$('#arcSlider').value=clamp(fmt(central),20,180);$('#angleFormula').textContent=`∠ACB ≈ ∠ADB ≈ ½ × ∠AOB = ${(central/2).toFixed(1)}°`;$('#angleRuleText').textContent=central>179?'چون AB قطر است، هر زاویه محاطی روبه‌روی آن ۹۰ درجه است. C و D را حرکت بده و ثابت ماندن آن را ببین.':'C و D هر دو کمان AB را می‌بینند؛ بنابراین زاویه‌های محاطی آن‌ها برابر و هر کدام نصف زاویه مرکزی AOB هستند.'}
+  angleCanvas.addEventListener('pointerdown',e=>{const p=pointerPos(e,angleCanvas),{w,h}=ctxFit(angleCanvas),g=angleGeom(w,h);for(const [k,P] of [['a',g.A],['b',g.B],['c',g.C],['d',g.D]])if(hypot(p.x-P.x,p.y-P.y)<36){AGL.drag=k;break}if(AGL.drag){angleCanvas.setPointerCapture(e.pointerId);e.preventDefault()}});
+  angleCanvas.addEventListener('pointermove',e=>{if(!AGL.drag)return;const p=pointerPos(e,angleCanvas),{w,h}=ctxFit(angleCanvas),g=angleGeom(w,h),a=normalize(Math.atan2(p.y-g.O.y,p.x-g.O.x));AGL[AGL.drag]=a;if(AGL.drag==='a'||AGL.drag==='b'){const delta=minorDelta(AGL.a,AGL.b);if(delta<rad(12)){if(AGL.drag==='a')AGL.a=normalize(AGL.b-rad(12));else AGL.b=normalize(AGL.a+rad(12))}if(delta>Math.PI){/* minorDelta never exceeds PI */}keepOnMajor('c');keepOnMajor('d')}else keepOnMajor(AGL.drag);drawAngleLab()});['pointerup','pointercancel'].forEach(ev=>angleCanvas.addEventListener(ev,()=>AGL.drag=null));
+  $('#arcSlider').addEventListener('input',e=>{const v=rad(+e.target.value);AGL.b=normalize(AGL.a+v);keepOnMajor('c');keepOnMajor('d');drawAngleLab()});const setArc=v=>{AGL.a=rad(-v/2);AGL.b=rad(v/2);AGL.c=Math.PI;AGL.d=rad(235);drawAngleLab()};$('#preset60').onclick=()=>setArc(60);$('#preset120').onclick=()=>setArc(120);$('#preset180').onclick=()=>setArc(180);
+
+  // ---------- Lab 3: chord + tangent ----------
+  const chordCanvas=$('#chordCanvas');let CH={r:160,d:75,tAngle:rad(-30),drag:null};
+  function chordGeom(w,h){const O={x:w*.47,y:h*.52},R=Math.min(CH.r,Math.min(w,h)*.33);CH.r=R;const half=Math.sqrt(Math.max(0,R*R-CH.d*CH.d)),y=O.y+CH.d,A={x:O.x-half,y},B={x:O.x+half,y},M={x:O.x,y},T=pointOn(O,R,CH.tAngle);return{O,R,half,A,B,M,T}}
+  function drawChordLab(){const{ctx,w,h}=ctxFit(chordCanvas);ctx.clearRect(0,0,w,h);const g=chordGeom(w,h);circle(ctx,g.O.x,g.O.y,g.R,'rgba(156,124,255,.04)','rgba(78,161,255,.82)',4);line(ctx,g.A.x,g.A.y,g.B.x,g.B.y,'#9c7cff',7);
+    // Matching tick marks on AM and MB make the bisection visible directly on the chord.
+    equalTick(ctx,g.A,g.M,1,'#f4ecff',9,5,3);equalTick(ctx,g.M,g.B,1,'#f4ecff',9,5,3);
+    circle(ctx,g.A.x,g.A.y,8,'#9c7cff','#fff',2);circle(ctx,g.B.x,g.B.y,8,'#9c7cff','#fff',2);circle(ctx,g.M.x,g.M.y,7,'#45e4da','#fff',2);text(ctx,'M',g.M.x,g.M.y+22,13,'#a7fff8');line(ctx,g.O.x,g.O.y,g.M.x,g.M.y,'#45e4da',3,[7,6]);if(CH.d>5)rightMarker(ctx,g.M,{x:0,y:CH.d>=0?1:-1},{x:1,y:0},'#45e4da',14);
+    const n={x:Math.cos(CH.tAngle),y:Math.sin(CH.tAngle)},u={x:-n.y,y:n.x},len=Math.max(w,h)*.7;line(ctx,g.T.x-u.x*len,g.T.y-u.y*len,g.T.x+u.x*len,g.T.y+u.y*len,'#ffb64d',5);line(ctx,g.O.x,g.O.y,g.T.x,g.T.y,'#56e39f',4);rightMarker(ctx,g.T,n,u,'#56e39f',15);text(ctx,'90°',g.T.x-u.x*28-n.x*24,g.T.y-u.y*28-n.y*24,13,'#b8ffd8');circle(ctx,g.T.x,g.T.y,12,'#ffb64d','#fff',2);text(ctx,'T',g.T.x,g.T.y-24,14);circle(ctx,g.O.x,g.O.y,7,'#fff','#4ea1ff',2);text(ctx,'O',g.O.x+17,g.O.y-14,14);text(ctx,'A',g.A.x,g.A.y-20,13);text(ctx,'B',g.B.x,g.B.y-20,13);
+    const lenChord=2*g.half;$('#chordD').textContent=fmt(CH.d);$('#chordLen').textContent=fmt(lenChord);$('#chordR').textContent=fmt(g.R);$('#halfChordVal').textContent=`${fmt(g.half)} = ${fmt(g.half)}`;$('#chordDOut').textContent=fmt(CH.d);$('#chordFormula').textContent=`L = 2√(r² − d²) = ${fmt(lenChord)}`}
+  chordCanvas.addEventListener('pointerdown',e=>{const p=pointerPos(e,chordCanvas),{w,h}=ctxFit(chordCanvas),g=chordGeom(w,h);if(hypot(p.x-g.T.x,p.y-g.T.y)<38)CH.drag='t';else if(Math.abs(p.y-g.A.y)<32&&p.x>g.A.x-30&&p.x<g.B.x+30)CH.drag='c';if(CH.drag){chordCanvas.setPointerCapture(e.pointerId);e.preventDefault()}});chordCanvas.addEventListener('pointermove',e=>{if(!CH.drag)return;const p=pointerPos(e,chordCanvas),{w,h}=ctxFit(chordCanvas),g=chordGeom(w,h);if(CH.drag==='t')CH.tAngle=Math.atan2(p.y-g.O.y,p.x-g.O.x);else{CH.d=clamp(p.y-g.O.y,0,g.R-5);$('#chordSlider').value=fmt(CH.d)}drawChordLab()});['pointerup','pointercancel'].forEach(ev=>chordCanvas.addEventListener(ev,()=>CH.drag=null));$('#chordSlider').addEventListener('input',e=>{CH.d=+e.target.value;drawChordLab()});$('#makeDiameter').onclick=()=>{CH.d=0;$('#chordSlider').value=0;drawChordLab()};$('#midChord').onclick=()=>{CH.d=75;$('#chordSlider').value=75;drawChordLab()};
+
+  // ---------- Lab 4: arc and arc length ----------
+  const arcCanvas=$('#arcCanvas');let ARC={theta:90,r:160,n:4,drag:false};
+  function gcd(a,b){while(b){[a,b]=[b,a%b]}return a}
+  function fractionText(theta){const g=gcd(Math.round(theta),360);return `${Math.round(theta)/g}/${360/g}`}
+  function arcGeom(w,h){const O={x:w*.48,y:h*.52},R=Math.min(ARC.r,Math.min(w,h)*.33);ARC.r=R;const a=-Math.PI/2,b=a+rad(ARC.theta);return{O,R,a,b,A:pointOn(O,R,a),B:pointOn(O,R,b)}}
+  function drawArcLab(){const{ctx,w,h}=ctxFit(arcCanvas);ctx.clearRect(0,0,w,h);const g=arcGeom(w,h);circle(ctx,g.O.x,g.O.y,g.R,'rgba(78,161,255,.035)','rgba(78,161,255,.8)',4);for(let i=0;i<ARC.n;i++){const a=-Math.PI/2+i*TAU/ARC.n,p=pointOn(g.O,g.R,a);line(ctx,g.O.x,g.O.y,p.x,p.y,'rgba(255,255,255,.11)',1.5,[5,6])}
+    ctx.save();ctx.beginPath();ctx.moveTo(g.O.x,g.O.y);ctx.arc(g.O.x,g.O.y,g.R,g.a,g.b,false);ctx.closePath();ctx.fillStyle='rgba(86,227,159,.09)';ctx.fill();ctx.restore();line(ctx,g.O.x,g.O.y,g.A.x,g.A.y,'#4ea1ff',3);line(ctx,g.O.x,g.O.y,g.B.x,g.B.y,'#4ea1ff',3);ctx.beginPath();ctx.arc(g.O.x,g.O.y,g.R,g.a,g.b,false);ctx.strokeStyle='#56e39f';ctx.lineWidth=10;ctx.lineCap='round';ctx.stroke();circle(ctx,g.B.x,g.B.y,12,'#ffb64d','#fff',2);text(ctx,'B',g.B.x,g.B.y-23,14);circle(ctx,g.A.x,g.A.y,9,'#56e39f','#fff',2);text(ctx,'A',g.A.x,g.A.y-22,14);circle(ctx,g.O.x,g.O.y,7,'#fff','#4ea1ff',2);text(ctx,'O',g.O.x+18,g.O.y+12,14);text(ctx,`${ARC.theta}°`,g.O.x+48,g.O.y-32,17,'#c3f8dc');
+    const circ=TAU*g.R,arcLen=ARC.theta/360*circ;$('#arcThetaVal').textContent=ARC.theta+'°';$('#arcFractionVal').textContent=fractionText(ARC.theta);$('#circVal').textContent=fmt(circ);$('#arcLengthVal').textContent=fmt(arcLen);$('#arcThetaOut').textContent=ARC.theta+'°';$('#arcRadiusOut').textContent=fmt(g.R);$('#divisionOut').textContent=ARC.n+' قسمت';$('#arcFormula').textContent=`L = (${ARC.theta}/360) × 2π × ${fmt(g.R)} ≈ ${fmt(arcLen)}`}
+  arcCanvas.addEventListener('pointerdown',e=>{const p=pointerPos(e,arcCanvas),{w,h}=ctxFit(arcCanvas),g=arcGeom(w,h);if(hypot(p.x-g.B.x,p.y-g.B.y)<40){ARC.drag=true;arcCanvas.setPointerCapture(e.pointerId);e.preventDefault()}});arcCanvas.addEventListener('pointermove',e=>{if(!ARC.drag)return;const p=pointerPos(e,arcCanvas),{w,h}=ctxFit(arcCanvas),g=arcGeom(w,h);let a=normalize(Math.atan2(p.y-g.O.y,p.x-g.O.x)-g.a),theta=fmt(deg(a));if(theta<10)theta=10;if(theta>350)theta=350;ARC.theta=theta;$('#arcThetaSlider').value=theta;drawArcLab()});['pointerup','pointercancel'].forEach(ev=>arcCanvas.addEventListener(ev,()=>ARC.drag=false));$('#arcThetaSlider').addEventListener('input',e=>{ARC.theta=+e.target.value;drawArcLab()});$('#arcRadiusSlider').addEventListener('input',e=>{ARC.r=+e.target.value;drawArcLab()});$('#divisionSlider').addEventListener('input',e=>{ARC.n=+e.target.value;drawArcLab()});const setTheta=v=>{ARC.theta=v;$('#arcThetaSlider').value=v;drawArcLab()};$('#arcQuarter').onclick=()=>setTheta(90);$('#arcThird').onclick=()=>setTheta(120);$('#arcHalf').onclick=()=>setTheta(180);
+
+  // ---------- Lab 5: finding center from perpendicular bisectors ----------
+  const centerCanvas=$('#centerCanvas');let CTR={a:rad(205),b:rad(325),c:rad(35),d:rad(165),drag:null,showO:true};
+  function centerGeom(w,h){const O={x:w*.5,y:h*.51},R=Math.min(180,Math.min(w,h)*.34);return{O,R,A:pointOn(O,R,CTR.a),B:pointOn(O,R,CTR.b),C:pointOn(O,R,CTR.c),D:pointOn(O,R,CTR.d)}}
+  function bisector(P,Q){const M={x:(P.x+Q.x)/2,y:(P.y+Q.y)/2},dx=Q.x-P.x,dy=Q.y-P.y,L=Math.hypot(dx,dy)||1;return{M,u:{x:-dy/L,y:dx/L},len:L}}
+  function lineIntersection(P,u,Q,v){const den=u.x*v.y-u.y*v.x;if(Math.abs(den)<1e-5)return null;const qmp={x:Q.x-P.x,y:Q.y-P.y},t=(qmp.x*v.y-qmp.y*v.x)/den;return{x:P.x+t*u.x,y:P.y+t*u.y}}
+  function drawCenterLab(){const{ctx,w,h}=ctxFit(centerCanvas);ctx.clearRect(0,0,w,h);const g=centerGeom(w,h),b1=bisector(g.A,g.B),b2=bisector(g.C,g.D),I=lineIntersection(b1.M,b1.u,b2.M,b2.u),len=Math.max(w,h)*.8;circle(ctx,g.O.x,g.O.y,g.R,'rgba(78,161,255,.03)','rgba(78,161,255,.82)',4);line(ctx,g.A.x,g.A.y,g.B.x,g.B.y,'#9c7cff',6);line(ctx,g.C.x,g.C.y,g.D.x,g.D.y,'#ffb64d',6);
+    // Equal-part marks: one tick pair for chord AB and double-tick pair for chord CD.
+    equalTick(ctx,g.A,b1.M,1,'#f4ecff',8,5,2.8);equalTick(ctx,b1.M,g.B,1,'#f4ecff',8,5,2.8);
+    equalTick(ctx,g.C,b2.M,2,'#fff0d7',8,6,2.8);equalTick(ctx,b2.M,g.D,2,'#fff0d7',8,6,2.8);
+    line(ctx,b1.M.x-b1.u.x*len,b1.M.y-b1.u.y*len,b1.M.x+b1.u.x*len,b1.M.y+b1.u.y*len,'#45e4da',3,[8,7]);line(ctx,b2.M.x-b2.u.x*len,b2.M.y-b2.u.y*len,b2.M.x+b2.u.x*len,b2.M.y+b2.u.y*len,'#56e39f',3,[8,7]);
+    // Right-angle markers at the exact intersection of each perpendicular bisector with its chord.
+    const c1dx=g.B.x-g.A.x,c1dy=g.B.y-g.A.y,c1L=Math.hypot(c1dx,c1dy)||1,c1u={x:c1dx/c1L,y:c1dy/c1L};
+    const c2dx=g.D.x-g.C.x,c2dy=g.D.y-g.C.y,c2L=Math.hypot(c2dx,c2dy)||1,c2u={x:c2dx/c2L,y:c2dy/c2L};
+    rightMarker(ctx,b1.M,b1.u,c1u,'#b4fff9',13);rightMarker(ctx,b2.M,b2.u,c2u,'#c6ffe0',13);
+    circle(ctx,b1.M.x,b1.M.y,7,'#45e4da','#fff',2);circle(ctx,b2.M.x,b2.M.y,7,'#56e39f','#fff',2);text(ctx,'M₁',b1.M.x,b1.M.y+23,13,'#b4fff9');text(ctx,'M₂',b2.M.x,b2.M.y+23,13,'#c6ffe0');
+    for(const [P,n,c] of [[g.A,'A','#9c7cff'],[g.B,'B','#9c7cff'],[g.C,'C','#ffb64d'],[g.D,'D','#ffb64d']]){circle(ctx,P.x,P.y,12,c,'#fff',2);text(ctx,n,P.x,P.y-23,14)}
+    let err=999,status='نامناسب';if(I){circle(ctx,I.x,I.y,10,'#ff6b7a','#fff',2);text(ctx,'تقاطع عمودمنصف‌ها',I.x,I.y-24,12,'#ffd2d7');err=hypot(I.x-g.O.x,I.y-g.O.y);status=err<1?'دقیق':'نزدیک'}if(CTR.showO){circle(ctx,g.O.x,g.O.y,6,'#fff','#4ea1ff',2);text(ctx,'O',g.O.x+18,g.O.y+12,14)}$('#centerErrorVal').textContent=I?err.toFixed(1):'—';$('#centerStatusVal').textContent=status;$('#centerChord1Val').textContent=fmt(b1.len);$('#centerChord2Val').textContent=fmt(b2.len);$('#centerNote').textContent=I?'عمودمنصف‌های دو وتر در یک نقطه به هم رسیدند. این نقطه همان مرکز دایره است.':'دو عمودمنصف تقریباً موازی‌اند؛ یکی از وترها را جابه‌جا کن تا جهت آن‌ها متفاوت شود.'}
+  centerCanvas.addEventListener('pointerdown',e=>{const p=pointerPos(e,centerCanvas),{w,h}=ctxFit(centerCanvas),g=centerGeom(w,h);for(const[k,P]of[['a',g.A],['b',g.B],['c',g.C],['d',g.D]])if(hypot(p.x-P.x,p.y-P.y)<38){CTR.drag=k;break}if(CTR.drag){centerCanvas.setPointerCapture(e.pointerId);e.preventDefault()}});centerCanvas.addEventListener('pointermove',e=>{if(!CTR.drag)return;const p=pointerPos(e,centerCanvas),{w,h}=ctxFit(centerCanvas),g=centerGeom(w,h);CTR[CTR.drag]=Math.atan2(p.y-g.O.y,p.x-g.O.x);drawCenterLab()});['pointerup','pointercancel'].forEach(ev=>centerCanvas.addEventListener(ev,()=>CTR.drag=null));$('#randomChords').onclick=()=>{const vals=[20+Math.random()*100,150+Math.random()*80,250+Math.random()*70,335+Math.random()*40].map(rad);[CTR.a,CTR.b,CTR.c,CTR.d]=vals;drawCenterLab()};$('#showCenterToggle').onclick=()=>{CTR.showO=!CTR.showO;drawCenterLab()};
+
+  // ---------- Quiz ----------
+  const quiz=[
+    {q:'اگر فاصله مرکز تا خط ۶ و شعاع ۸ باشد، وضعیت خط چیست؟',a:['مماس','قاطع','خارج دایره','قطر'],c:1,why:'چون ۶ < ۸ است، خط قاطع است.'},
+    {q:'در چه حالتی خط مماس دایره است؟',a:['d<r','d=r','d>r','d=0'],c:1,why:'مماس دقیقاً زمانی رخ می‌دهد که فاصله مرکز تا خط با شعاع برابر باشد.'},
+    {q:'زاویه مرکزی روبه‌روی یک کمان ۱۴۰° است. زاویه محاطی همان کمان؟',a:['۷۰°','۱۴۰°','۲۸۰°','۴۰°'],c:0,why:'زاویه محاطی نصف زاویه مرکزی روبه‌روی همان کمان است.'},
+    {q:'دو زاویه محاطی که یک کمان مشترک را می‌بینند چه رابطه‌ای دارند؟',a:['متمم‌اند','برابرند','مکمل‌اند','هیچ'],c:1,why:'زاویه‌های محاطی روبه‌روی یک کمان با هم برابرند.'},
+    {q:'زاویه محاطی روبه‌روی قطر چند درجه است؟',a:['۴۵°','۶۰°','۹۰°','۱۸۰°'],c:2,why:'کمان روبه‌روی قطر ۱۸۰° است، پس زاویه محاطی ۹۰° است.'},
+    {q:'کدام وتر از همه بلندتر است؟',a:['دورترین وتر از مرکز','هر وتر مماس','قطر','کوتاه‌ترین شعاع'],c:2,why:'قطر وتری است که از مرکز می‌گذرد و بیشترین طول را دارد.'},
+    {q:'عمود رسم‌شده از مرکز بر یک وتر چه می‌کند؟',a:['وتر را نصف می‌کند','وتر را دو برابر می‌کند','مماس می‌سازد','شعاع را نصف می‌کند'],c:0,why:'عمود مرکز بر وتر، وتر را به دو قسمت مساوی تقسیم می‌کند.'},
+    {q:'کمان ۹۰ درجه چه کسری از محیط دایره است؟',a:['۱/۲','۱/۳','۱/۴','۱/۶'],c:2,why:'۹۰ از ۳۶۰ یعنی یک‌چهارم محیط.'}
+  ];
+  let qi=0,good=0,bad=0,answered=false;function renderQ(){const item=quiz[qi];$('#questionText').textContent=`${qi+1}) ${item.q}`;$('#answers').innerHTML='';$('#feedback').textContent='';answered=false;item.a.forEach((x,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=x;b.onclick=()=>answerQ(i,b);$('#answers').appendChild(b)});updateScore()}function answerQ(i,b){if(answered)return;answered=true;const item=quiz[qi],buttons=$$('.answer');buttons[item.c].classList.add('correct');if(i===item.c){good++;$('#feedback').textContent='آفرین! '+item.why}else{bad++;b.classList.add('wrong');$('#feedback').textContent='این گزینه درست نیست. '+item.why}updateScore()}function updateScore(){const total=good+bad,pct=total?Math.round(good/total*100):0;$('#scorePct').textContent=pct+'%';$('#scoreRing').style.setProperty('--p',pct+'%');$('#scoreGood').textContent=good;$('#scoreBad').textContent=bad;$('#scoreStep').textContent=`${qi+1}/${quiz.length}`}$('#nextQuestion').onclick=()=>{if(qi<quiz.length-1){qi++;renderQ()}else $('#feedback').textContent=`پایان چالش! نتیجه: ${good} پاسخ درست از ${quiz.length}.`};$('#restartQuiz').onclick=()=>{qi=0;good=0;bad=0;renderQ()};
+
+  function resizeAll(){[lineCanvas,angleCanvas,chordCanvas,arcCanvas,centerCanvas].forEach(c=>ctxFit(c))}function drawAll(){drawLineLab();drawAngleLab();drawChordLab();drawArcLab();drawCenterLab()}let raf;window.addEventListener('resize',()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{resizeAll();drawAll()})});document.addEventListener('keydown',e=>{const map={'1':'lineLab','2':'angleLab','3':'chordLab','4':'arcLab','5':'centerLab','6':'challengeLab'};if(map[e.key])$(`.tab-btn[data-tab="${map[e.key]}"]`).click()});renderQ();resizeAll();drawAll();
+})();
+</script>
+</body>
+</html>
